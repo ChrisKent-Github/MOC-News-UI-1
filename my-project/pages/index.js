@@ -2,8 +2,19 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Feed from '../components/Feed';
 import Sidebar from '../components/Sidebar';
+import React, { useEffect, useState } from "react";
+
+
+
 
 export default function Home() {
+
+  const [category, setCategory] = useState("General")
+
+
+  let requestPath = "localhost:8080/category/find_category?category=" + [category]
+  
+
   return (
     <div>
       <Head>
@@ -16,11 +27,14 @@ export default function Home() {
       <Header />
 
       <main className="flex">
+    
 
       { /* Sidebar */ }
-      <Sidebar />
+     <Sidebar setCategory={setCategory} />
+     {category}
       { /* Newsfeed */ }
-      <Feed />
+      <Feed requestPath={requestPath}/>
+      {requestPath}
       { /* Widgets */ }
 
       </main>
